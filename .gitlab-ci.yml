@@ -1,0 +1,16 @@
+---
+# taken from https://gitlab.com/pandoc/pandoc-ci-example
+
+pages:
+  image:
+    name: pandoc/core
+    entrypoint: ["/bin/sh", "-c"]
+  script:
+    - pandoc -t revealjs -s -o public/index.html presentation.md
+    - pandoc -t revealjs -s --self-contained -o public/contained.html presentation.md
+    - cp -r css public/css
+    - cp -r fonts public/fonts
+    - cp -r images public/images
+  artifacts:
+    paths:
+      - public
